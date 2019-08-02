@@ -8,6 +8,7 @@ module.exports = {
     config.resolve.alias
       .set('@', resolve('src'))
       .set('_c', resolve('src/components'))
+      .set('_s', resolve('src/assets/style'))
     },
   // 打包时不生成.map文件
   productionSourceMap: false,

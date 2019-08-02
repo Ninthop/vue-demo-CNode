@@ -1,16 +1,16 @@
 <template>
   <div class="home">
-    <div>
-      
-    </div>
+    <all-header></all-header>
   </div>
 </template>
 
 <script>
+import AllHeader from '_c/Header'
+
 export default {
   name: 'home',
   components: {
-    
+    AllHeader
   }
 }
 </script>
