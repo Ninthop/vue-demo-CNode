@@ -9,6 +9,7 @@ module.exports = {
       .set('@', resolve('src'))
       .set('_c', resolve('src/components'))
       .set('_s', resolve('src/assets/style'))
+      .set('_com', resolve('src/common'))
     },
   // 打包时不生成.map文件
   productionSourceMap: false,
