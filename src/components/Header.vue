@@ -14,8 +14,17 @@
                 <fade>
                     <div class="header-messageBox" v-show="isBoxShow">
                         <div class="messageBox-contain" @click.stop="boxShow">
-                            源码地址：<a id="github" href="https://github.com/Ninthop/vue-demo-CNode" target="_blank">https://github.com/Ninthop/vue-demo-CNode</a>
-                            <button class="messageBox-btn" @click.stop="boxClose">确定</button>
+                            源码地址：
+                            <a id="github" href="https://github.com/Ninthop/vue-demo-CNode" target="_blank">Vue-demo-CNodeJs</a>
+                            <hr>
+                            <div>技术栈：</div>
+                            <ul>
+                                <li>Vue-cli3</li>
+                                <li>Axios —— CNodeJSApi</li>
+                                <li>Vuex</li>
+                                <li>Stylus</li>
+                            </ul>
+                            <button class="messageBox-btn" @click.stop="boxClose">确 定</button>
                         </div>
                     </div>
                 </fade>
@@ -68,13 +77,11 @@ export default {
         width 100%
         user-select none
         .header-inner
-            width 85%
+            width 80%
             margin auto
             padding .5rem
             .header-contain
                 position relative
-                min-width 96rem
-                max-width 140rem
                 .header-left
                     .logo
                         width 12rem
@@ -83,6 +90,7 @@ export default {
                         line-height 3.4rem
                         cursor pointer
                 .header-right
+                    padding 1.5rem
                     font-size 1.3rem
                     color #ccc
                     position absolute
@@ -107,6 +115,23 @@ export default {
                         border-radius .3rem
                         font-size 1.5rem
                         padding 2rem
+                        @media screen and (max-width 33.75rem)
+                            width 25rem 
+                            height 28rem
+                            margin 8rem auto
+                        
+                        hr
+                            border 0
+                            height .2rem
+                            background-color #7f8c8d
+                            margin 2rem 0
+                        div
+                            font-size 1.5rem
+                        ul
+                            li
+                                font-size 1.3rem 
+                                margin 1rem 1.5rem
+                                list-style-type disc 
                         a
                             position relative
                             font-size 1.5rem
@@ -143,6 +168,7 @@ export default {
                             transition 0.3s
                             border-radius .3rem
                             cursor pointer
+                            outline none
                             &:hover
                                 background-color #34495e
                                 color #ecf0f1

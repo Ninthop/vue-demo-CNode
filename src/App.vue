@@ -1,13 +1,20 @@
 <template>
   <div id="app">
-    <router-view/>
+    <all-header></all-header>
+    <keep-alive>
+      <router-view/>
+    </keep-alive>
   </div>
 </template>
 
 <script>
+import AllHeader from '_c/Header'
+
 export default {
   name: 'app',
-  
+  components: {
+    AllHeader
+  }
 }
 </script>
 
