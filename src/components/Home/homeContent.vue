@@ -1,7 +1,7 @@
 <template>
     <div class="content">
         <div class="topic" v-for="item of list" :key="item.id">
-            <img :src="item.author.avatar_url" alt="用户头像" class="author" :title="item.author.loginname">
+            <img :src="item.author.avatar_url" alt="用户头像" class="author" :title="item.author.loginname" @click="changeUser(item.author.loginname)">
             <span class="comment">
                 <em>{{ item.reply_count }}/</em>
                 <span class="allComment">{{ item.visit_count }}</span>
@@ -9,7 +9,13 @@
             <span :class="sign(item.top)" v-if="item.top">置顶</span>
             <span :class="signGood(item.good)" v-else-if="item.good">精华</span>
             <span :class="sign(item.top)" v-else>{{$tab[item.tab]}}</span>
-            <a href="#" class="title" :title="item.title">{{ item.title }}</a>
+            <span 
+                class="title" 
+                :title="item.title"
+                @click="changeId(item.id, item.author.loginname)"
+            >
+                {{ item.title }}
+            </span>
             <span class="topic-right">
                 <span class="last-reply-time">{{ item.last_reply_at | formatTime}}</span>
             </span>
@@ -36,6 +42,19 @@ export default {
             if (good) { 
                 return 'top'
             }
+        },
+        changeId (id, name) {
+            this.$store.dispatch('changeId', id)
+            this.$store.dispatch('changeCss', false)
+            this.$store.dispatch('changeName', name)
+            this.$router.push({path: '/topic/' + id})
+            // console.log(id)
+            // console.log(name)
+        },
+        changeUser (name) {
+            this.$store.dispatch('changeName', name)
+            this.$store.dispatch('changeCss', true)
+            this.$router.push({path: '/user/' + name})
         }
     }
 }
@@ -96,7 +115,10 @@ export default {
                 text-decoration none
                 height 2rem
                 ellipsis()
+                cursor pointer
                 max-width 60rem
+                @media all and (min-width 1600px)
+                    max-width 80rem
                 @media all and (max-width 768px)
                     max-width 45rem
                 @media all and (max-width 500px)

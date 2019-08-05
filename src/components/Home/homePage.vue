@@ -25,21 +25,27 @@ export default {
         prePage () {
             if (this.$store.state.page > 1) {
                 this.$store.dispatch('changePage', --this.$store.state.page)
+                this.backTop()
             }
         },
         firstPage () {
             this.$store.state.page = 1
             this.$store.dispatch('changePage', this.$store.state.page)
+            this.backTop()
         },
         nextPage () {
             this.$store.dispatch('changePage', ++this.$store.state.page)
+            this.backTop()
+        },
+        backTop() {
+            let timer = setTimeout(() => {
+                let ispeed = Math.floor(-this.scrollTop / 5)
+                document.documentElement.scrollTop = document.body.scrollTop = this.scrollTop + ispeed
+                if(this.scrollTop === 0) {
+                    clearTimeout(timer)
+                }
+            }, 16)
         }
-    },
-    mounted () {
-        document.body.addEventListener('touchstart', function(){ });
-    },
-    destoryed () {
-        document.body.removeEventListener('touchstart', function(){ });
     }
 }
 </script>
@@ -63,6 +69,10 @@ export default {
                 cursor pointer
                 color #636e72
                 transition 0.3s
+                @media all and (min-width 980px)
+                    &:hover
+                        color #7f8c8d
+                        background-color #34495e                
                 &:active
                     color #7f8c8d
                     background-color #34495e

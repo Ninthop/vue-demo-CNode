@@ -5,6 +5,7 @@ import store from './store/'
 import fastClick from 'fastclick'
 import './assets/style/reset.css'
 import './assets/style/border.css'
+import './assets/style/mdcss.styl'
 import tab from './lib/tab.js'
 
 Vue.config.productionTip = false

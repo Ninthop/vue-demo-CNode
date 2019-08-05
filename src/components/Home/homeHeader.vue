@@ -53,6 +53,7 @@ export default {
                 margin 0 .9rem
                 color #80bd01
                 cursor pointer
+                list-style none
                 &:hover
                     color #6c5ce7
         ul.all
