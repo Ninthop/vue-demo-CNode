@@ -2,26 +2,26 @@ import Home from '../views/Home.vue'
 
 export default[
     {
-      path: '/',
+      path: '/dist',
       name: 'home',
       component: Home
     },
     {
-      path: '/topic/:id',
+      path: '/dist/topic/:id',
       name: 'topic',
       component: () => import('../views/Topic.vue')
     },
     {
-      path: '/user/:loginname',
+      path: '/dist/user/:loginname',
       name: 'user',
       component: () => import('../views/User.vue')
     },
     {
-      path: '/topic',
+      path: '/dist/topic',
       redirect: '/'
     },
-    // {
-    //   path: '/user',
-    //   redirect: '/'
-    // }
+    {
+      path: '/dist/user',
+      redirect: '/'
+    }
 ]
