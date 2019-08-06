@@ -45,6 +45,7 @@ export default {
                 .then(res => {
                     this.userInfo = res.data.data
                     // console.log(this.list.author.loginname)
+                    this.$store.state.topicOrUser = true
                 })
                 .catch(function (error) { 
                     console.log('连接失败，请刷新重试2')

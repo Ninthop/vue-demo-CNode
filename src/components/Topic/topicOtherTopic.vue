@@ -39,6 +39,7 @@ export default {
             this.$store.dispatch('changeId', id)
             this.$store.dispatch('changeName', name)
             this.$router.push({path: '/topic/' + id})
+            this.$store.state.topicOrUser = false
             // console.log(id)
             // console.log(name)
         }
