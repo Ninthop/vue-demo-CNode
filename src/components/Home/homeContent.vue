@@ -1,7 +1,7 @@
 <template>
     <div class="content">
         <div class="topic" v-for="item of list" :key="item.id">
-            <img :src="item.author.avatar_url" alt="用户头像" class="author" :title="item.author.loginname" @click="changeUser(item.author.loginname)">
+            <span class="author"><img :src="item.author.avatar_url" alt="用户头像" class="author-img" :title="item.author.loginname" @click="changeUser(item.author.loginname)"></span>
             <span class="comment">
                 <em>{{ item.reply_count }}/</em>
                 <span class="allComment">{{ item.visit_count }}</span>
@@ -72,9 +72,12 @@ export default {
             align-items center
             .author
                 width 3rem
-                height 3rem 
-                border-radius .4rem
+                height 3rem
                 cursor pointer
+                .author-img
+                    width 3rem
+                    height 3rem 
+                    border-radius .4rem
             .comment
                 width 8rem
                 line-height 2em
