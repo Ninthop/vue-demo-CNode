@@ -30,7 +30,7 @@ export default {
         changeUser (name) {
             this.$store.dispatch('changeName', name)
             this.$store.dispatch('changeCss', true)
-            this.$router.push({path: '/dist/user/' + name})
+            this.$router.push({path: '/user/' + name})
         }
     }
 }

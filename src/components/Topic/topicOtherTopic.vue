@@ -38,7 +38,7 @@ export default {
         changeId (id, name) {
             this.$store.dispatch('changeId', id)
             this.$store.dispatch('changeName', name)
-            this.$router.push({path: '/dist/topic/' + id})
+            this.$router.push({path: '/topic/' + id})
             // console.log(id)
             // console.log(name)
         }

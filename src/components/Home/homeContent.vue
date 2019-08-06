@@ -47,14 +47,14 @@ export default {
             this.$store.dispatch('changeId', id)
             this.$store.dispatch('changeCss', false)
             this.$store.dispatch('changeName', name)
-            this.$router.push({path: '/dist/topic/' + id})
+            this.$router.push({path: '/topic/' + id})
             // console.log(id)
             // console.log(name)
         },
         changeUser (name) {
             this.$store.dispatch('changeName', name)
             this.$store.dispatch('changeCss', true)
-            this.$router.push({path: '/dist/user/' + name})
+            this.$router.push({path: '/user/' + name})
         }
     }
 }
