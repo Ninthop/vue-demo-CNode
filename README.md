@@ -8,7 +8,7 @@
 - Axios
 - Vuex
 - Stylus
-- element　　//仅按需引入了loading功能
+- element-ui　　//仅按需引入了loading功能
 
 ### 插件
 - fastClick　　//解决点击300ms延迟问题
