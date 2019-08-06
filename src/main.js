@@ -7,9 +7,11 @@ import './assets/style/reset.css'
 import './assets/style/border.css'
 import './assets/style/mdcss.styl'
 import tab from './lib/tab.js'
+import { Loading } from 'element-ui'
 
 Vue.config.productionTip = false
 Vue.prototype.$tab = tab
+Vue.use(Loading)
 
 new Vue({
   router,

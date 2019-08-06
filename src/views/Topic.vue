@@ -22,6 +22,7 @@ import TopicReply from '_c/Topic/topicReply.vue'
 import TopicUserPanel from '_c/Topic/topicUserPanel.vue'
 import axios from 'axios'
 import { mapState } from 'vuex'
+import * as util from '@/lib/util.js'
 
 export default {
     name: 'topic',
@@ -40,48 +41,59 @@ export default {
         }
     },
     mounted () {
+        util.startLoading()
         axios
             .get(`https://cnodejs.org/api/v1/topic/${this.$store.state.id}`)
             .then(res => {
                 this.list = res.data.data
-                console.log(this.list)
+                // console.log(this.list)
+                util.endLoading()
             })
             .catch(function (error) { 
                 alert('连接失败，请刷新重试');
+                util.endLoading()
             });
         axios
             .get(`https://cnodejs.org/api/v1/user/${this.$store.state.loginname}`)
             .then(res => {
                 this.userInfo = res.data.data
                 // console.log(this.userInfo)
+                util.endLoading()
             })
             .catch(function (error) { 
                 alert('连接失败，请刷新重试');
+                util.endLoading()
             });
     },
     watch: {
     '$route.path' (newVal,oldVal) {
         if (newVal. match('topic')) {
+            util.startLoading()
             axios
                 .get(`https://cnodejs.org/api/v1${newVal}`)
                 .then(res => {
                     this.list = res.data.data
                     // console.log(this.list.author.loginname)
                     this.$store.state.loginname = this.list.author.loginname
+                    util.endLoading()
                 })
                 .catch(function (error) { 
                     console.log('连接失败，请刷新重试')
+                    util.endLoading()
                 })
             }
         },
     '$store.state.loginname' (newVal,oldVal) {
+        util.startLoading()
         axios
             .get(`https://cnodejs.org/api/v1/user/${newVal}`)
             .then(res => {
                 this.userInfo = res.data.data
+                util.endLoading()
             })
             .catch(function (error) { 
                 alert('连接失败，请刷新重试');
+                util.endLoading()
             });
         }
     }

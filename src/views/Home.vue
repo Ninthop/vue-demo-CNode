@@ -12,6 +12,7 @@ import HomeContent from '_c/Home/homeContent.vue'
 import HomePage from '_c/Home/homePage.vue'
 import axios from 'axios'
 import {mapState} from 'vuex'
+import * as util from '@/lib/util.js'
 
 export default {
   name: 'home',
@@ -23,7 +24,7 @@ export default {
   data () {
     return {
       page: this.$store.state.page,
-      limit: 40,
+      limit: 30,
       tab: "all",
       list: [],
       store: {}
@@ -36,6 +37,7 @@ export default {
       }else{
         this.tab = head
       }
+      util.startLoading()
       axios
         .get('https://cnodejs.org/api/v1/topics',
         {
@@ -47,13 +49,16 @@ export default {
         })
       .then(res => {
         this.list = res.data.data
+        util.endLoading()
       })
       .catch(function (error) { 
         alert('连接失败，请刷新重试');
+        util.endLoading()
       });
     }
   },
   mounted () {
+    util.startLoading()
     axios
       .get('https://cnodejs.org/api/v1/topics',
       {
@@ -65,13 +70,16 @@ export default {
       })
       .then(res => {
         this.list = res.data.data
+        util.endLoading()
       })
       .catch(function (error) { 
         alert('连接失败，请刷新重试');
+        util.endLoading()
       });
   },
   watch: {
     '$store.state.page' (newVal,oldVal) {
+      util.startLoading()
       axios
       .get('https://cnodejs.org/api/v1/topics',
       {
@@ -83,9 +91,11 @@ export default {
       })
       .then(res => {
         this.list = res.data.data
+        util.endLoading()
       })
       .catch(function (error) { 
         alert('连接失败，请刷新重试');
+        util.endLoading()
       });
     }
   }
