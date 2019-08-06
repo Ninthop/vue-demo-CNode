@@ -102,16 +102,18 @@ export default {
                 color white
                 background-color #80bd01
                 border-radius .3rem
-                min-width 2rem
+                min-width 2.4rem
                 margin-left .5rem
+                text-align center
             .sign
                 font-size 1.2rem
                 padding .2rem .4rem
                 color #999
                 background-color #e5e5e5
                 border-radius .3rem
-                min-width 2rem
+                min-width 2.4rem
                 margin-left .5rem
+                text-align center
             .title
                 font-size 1.6rem
                 margin-left .5rem
@@ -119,13 +121,6 @@ export default {
                 height 2rem
                 ellipsis()
                 cursor pointer
-                max-width 60rem
-                @media all and (min-width 1600px)
-                    max-width 80rem
-                @media all and (max-width 768px)
-                    max-width 45rem
-                @media all and (max-width 500px)
-                    max-width 28rem
                 &:link
                     color black
                 &:visited
