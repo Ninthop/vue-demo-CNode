@@ -24,11 +24,12 @@
 </template>
 
 <script>
+import * as api from '@/lib/api.js'
+
 export default {
     name: 'homeContent',
     props: {
-        list: Array,
-        tab: String
+        list: Array
     },
     methods: {
         sign (top) {

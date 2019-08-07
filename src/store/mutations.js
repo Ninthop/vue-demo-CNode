@@ -1,6 +1,15 @@
 const mutations = {
     changePage (state, page) {
         state.page = page
+        try {
+            sessionStorage.page = page
+        } catch (error) {}
+    },
+    changeTab (state, tab) {
+        state.tab = tab
+        try {
+            sessionStorage.tab = tab
+        } catch (error) {}
     },
     changeId (state, id) {
         state.id = id

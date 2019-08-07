@@ -9,7 +9,6 @@
                 @click="changeId(item.id, item.author.loginname)"
             >
                 <span class="other-title user-title">
-                    <img :src="item.author.avatar_url" alt="头像" class="author-head" v-if="topicOrUser">
                     <span class="title">{{ item.title }}</span>
                     <span class="user-right" v-if="topicOrUser">
                         <span>{{ item.last_reply_at | formatTime }}</span>
@@ -29,24 +28,19 @@ export default {
     props: {
         userInfo: Object
     },
-    data () {
-        return {
-            topicOrUser: this.$store.state.topicOrUser
-        }
-    },
     methods: {
         changeId (id, name) {
             this.$store.dispatch('changeId', id)
             this.$store.dispatch('changeName', name)
             this.$router.push({path: '/topic/' + id})
-            this.$store.state.topicOrUser = false
+            this.$store.dispatch('changeCss', false)
             // console.log(id)
             // console.log(name)
         }
     },
-    watch: {
-        '$store.state.topicOrUser' (newVal, oldVal) {
-            return newVal
+    computed: {
+        topicOrUser () {
+            return this.$store.state.topicOrUser
         }
     }
 }
@@ -73,29 +67,20 @@ export default {
                 font-size 1.3rem
                 color #778087
                 ellipsis()
-                transition 0.1s
+                transition 240ms
                 &:hover
                     text-decoration underline
-                    font-size 1.5rem
-                    padding-bottom .5rem
+                    font-size 1.6rem
+                    padding-bottom 0.7rem
             .divider-user
                 height .1rem
                 border-bottom .1rem solid lightgray
                 margin 1rem
-            .author-head
-                height 3rem
-                width 3rem
-                transition 0.2s
-                margin-right 1rem
             .title
                 ellipsis()
         .user-title
             display flex
             align-items center
-            &:hover
-                .author-head
-                    height 5rem
-                    width 5rem
             .user-right
                 flex 1
                 display flex

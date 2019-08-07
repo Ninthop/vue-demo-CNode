@@ -1,26 +1,9 @@
 const state = {
-    page: 1,
+    page: sessionStorage.page || 1,
+    tab: sessionStorage.tab || 'all',
     id: sessionStorage.id || '',
     loginname: sessionStorage.name || '',
-    topicOrUser: false
+    topicOrUser: sessionStorage.bool || false
 }
-
-try {
-    if(sessionStorage.id) {
-        id = sessionStorage.id
-    }
-} catch (e) {}
-
-try {
-    if(sessionStorage.name) {
-        loginname = sessionStorage.name
-    }
-} catch (e) {}
-
-try {
-    if(sessionStorage.bool) {
-        bool = sessionStorage.name
-    }
-} catch (e) {}
 
 export default state

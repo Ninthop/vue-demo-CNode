@@ -9,7 +9,7 @@
                 @click="changeId(item.id, item.author.loginname)"
             >
                 <span class="other-title user-title">
-                    <img :src="item.author.avatar_url" alt="头像" class="author-head" v-if="topicOrUser">
+                    <span class="author-head" v-if="topicOrUser"><img :src="item.author.avatar_url" alt="头像" class="author-head-img"></span>
                     <span class="title">{{ item.title }}</span>
                     <span class="user-right" v-if="topicOrUser">
                         <span>{{ item.last_reply_at | formatTime }}</span>
@@ -29,23 +29,19 @@ export default {
     props: {
         userInfo: Object
     },
-    data () {
-        return {
-            topicOrUser: this.$store.state.topicOrUser
-        }
-    },
     methods: {
         changeId (id, name) {
             this.$store.dispatch('changeId', id)
             this.$store.dispatch('changeName', name)
             this.$router.push({path: '/topic/' + id})
+            this.$store.dispatch('changeCss', false)
             // console.log(id)
             // console.log(name)
         }
     },
-    watch: {
-        '$store.state.topicOrUser' (newVal, oldVal) {
-            return newVal
+    computed: {
+        topicOrUser () {
+            return this.$store.state.topicOrUser
         }
     }
 }
@@ -86,6 +82,11 @@ export default {
                 width 3rem
                 transition 0.2s
                 margin-right 1rem
+                .author-head-img
+                    height 3rem
+                    width 3rem
+                    transition 0.2s
+                    border-radius .4rem
             .title
                 ellipsis()
         .user-title
@@ -95,6 +96,10 @@ export default {
                 .author-head
                     height 5rem
                     width 5rem
+                    border-radius .4rem
+                    .author-head-img
+                        height 5rem
+                        width 5rem
             .user-right
                 flex 1
                 display flex

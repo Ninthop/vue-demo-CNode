@@ -6,6 +6,7 @@
             <li class="share" @click="makeActive('share')">分享</li>
             <li class="ask" @click="makeActive('ask')">问答</li>
             <li class="job" @click="makeActive('job')">招聘</li>
+            <li class="refresh-last" @click="refresh">刷新</li>
         </ul>
     </div>
 </template>
@@ -15,17 +16,25 @@ import { mapState } from 'vuex'
 
 export default {
     name: 'homeHeader',
-    data () {
-        return {
-            active: 'all'
-        }
-    },
     methods: {
         makeActive (head) {
             this.active = head
             let page = 1
             this.$store.dispatch('changePage', page)
-            this.$emit('tabChange', head)
+            this.$store.dispatch('changeTab', head)
+        },
+        refresh () {
+            this.$emit('refresh')
+        }
+    },
+    computed: {
+        active: {
+           get () {
+               return this.$store.state.tab
+           }, 
+           set (val) {
+               this.$store.state.tab = val
+           }
         }
     }
 }
@@ -48,13 +57,22 @@ export default {
                 display flex
                 justify-content center
             li
-                font-size 1.4rem
+                font-size 1.3rem
                 padding .4rem .4rem
                 margin 0 .9rem
                 color #80bd01
                 cursor pointer
                 list-style none
                 &:hover
+                    color #6c5ce7
+            .refresh-last
+                width 1rem
+                flex 1
+                display flex
+                justify-content flex-end
+                &:hover
+                    color #80bd01
+                &:active
                     color #6c5ce7
         ul.all
             .all

@@ -10,9 +10,7 @@
 import TopicUserPanel from '_c/Topic/topicUserPanel.vue'
 import TopicOtherTopic from '_c/Topic/topicOtherTopic.vue'
 import TopicRecentReply from '_c/Topic/topicRecentReply.vue'
-import axios from 'axios'
-import { mapState } from 'vuex'
-import * as util from '@/lib/util.js'
+import * as api from '@/lib/api.js'
 
 export default {
     name: 'User',
@@ -27,35 +25,21 @@ export default {
         }
     },
     mounted () {
-        util.startLoading()
-        axios
-            .get(`https://cnodejs.org/api/v1${this.$route.path}`)
+            api.getUserInfo(`/user/${this.$store.state.loginname}`)
             .then(res => {
-                this.userInfo = res.data.data
+                this.userInfo = res.data
                 // console.log(this.userInfo)
                 this.$store.state.loginname = this.userInfo.loginname
-                util.endLoading()
             })
-            .catch(function (error) { 
-                alert('连接失败，请刷新重试1');
-                util.endLoading()
-            });
     },
     watch: {
         '$route.path' (newVal,oldVal) {
         if (newVal. match('user')) {
-            util.startLoading()
-            axios
-                .get(`https://cnodejs.org/api/v1${newVal}`)
+                api.getUserInfo(newVal)
                 .then(res => {
-                    this.userInfo = res.data.data
+                    this.userInfo = res.data
                     // console.log(this.list.author.loginname)
                     this.$store.state.topicOrUser = true
-                    util.endLoading()
-                })
-                .catch(function (error) { 
-                    console.log('连接失败，请刷新重试2')
-                    util.endLoading()
                 })
             }
         }

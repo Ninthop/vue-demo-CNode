@@ -35,6 +35,7 @@
 
 <script>
 import Fade from '_com/animate/fade.vue'
+import * as api from '@/lib/api.js'
 
 var timer;
 

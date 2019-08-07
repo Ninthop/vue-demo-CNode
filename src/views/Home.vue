@@ -1,7 +1,7 @@
 <template>
   <div class="home">
-    <home-header @tabChange="tabChange"></home-header>
-    <home-content :list="list" :tab="tab"></home-content>
+    <home-header @refresh="refresh"></home-header>
+    <home-content :list="list"></home-content>
     <home-page></home-page>
   </div>
 </template>
@@ -10,9 +10,7 @@
 import HomeHeader from '_c/Home/homeHeader.vue'
 import HomeContent from '_c/Home/homeContent.vue'
 import HomePage from '_c/Home/homePage.vue'
-import axios from 'axios'
-import {mapState} from 'vuex'
-import * as util from '@/lib/util.js'
+import * as api from '@/lib/api.js'
 
 export default {
   name: 'home',
@@ -23,80 +21,59 @@ export default {
   },
   data () {
     return {
-      page: this.$store.state.page,
       limit: 30,
       tab: "all",
-      list: [],
-      store: {}
+      list: []
     }
   },
   methods: {
-    tabChange (head) {
-      if (head == 'all'){
-        this.tab = null
-      }else{
-        this.tab = head
-      }
-      util.startLoading()
-      axios
-        .get('https://cnodejs.org/api/v1/topics',
-        {
-          params:{
-            page: this.page,
-            limit: this.limit,
-            tab: this.tab
-          }
-        })
-      .then(res => {
-        this.list = res.data.data
-        util.endLoading()
+    getData () {
+      api.getHomeInfo(
+      {
+        page: this.$store.state.page,
+        limit: this.limit,
+        tab: this.$store.state.tab
       })
-      .catch(function (error) { 
-        alert('连接失败，请刷新重试');
-        util.endLoading()
-      });
+      .then(res => {
+        this.list = res.data
+      })
+    },
+    refresh () {
+      this.$store.state.page = 1
+      this.$store.state.tab = 'all'
+      this.getData()
     }
   },
   mounted () {
-    util.startLoading()
-    axios
-      .get('https://cnodejs.org/api/v1/topics',
-      {
-        params:{
-          page: this.page,
-          limit: this.limit,
-          tab: this.tab
-        }
-      })
-      .then(res => {
-        this.list = res.data.data
-        util.endLoading()
-      })
-      .catch(function (error) { 
-        alert('连接失败，请刷新重试');
-        util.endLoading()
-      });
+    this.getData()
   },
   watch: {
+    //监听页数和tab变动，发送相应请求
     '$store.state.page' (newVal,oldVal) {
-      util.startLoading()
-      axios
-      .get('https://cnodejs.org/api/v1/topics',
+      api.getHomeInfo(
       {
-        params:{
-          page: newVal,
-          limit: this.limit,
-          tab: this.tab
-        }
+        page: newVal,
+        limit: this.limit,
+        tab: this.$store.state.tab
       })
       .then(res => {
-        this.list = res.data.data
-        util.endLoading()
+        this.list = res.data
       })
-      .catch(function (error) { 
-        alert('连接失败，请刷新重试');
-        util.endLoading()
-      });
+    },
+    '$store.state.tab' (newVal,oldVal) {
+      if (newVal == 'all')
+      {
+        this.tab = null
+      }
+      api.getHomeInfo(
+      {
+        page: this.$store.state.page,
+        limit: this.limit,
+        tab: newVal
+      })
+      .then(res => {
+        this.list = res.data
+      })
     }
   }
 }
