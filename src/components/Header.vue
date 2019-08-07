@@ -15,7 +15,7 @@
                     <div class="header-messageBox" v-show="isBoxShow">
                         <div class="messageBox-contain" @click.stop="boxShow">
                             源码地址：
-                            <a id="github" href="https://github.com/Ninthop/vue-demo-CNode" target="_blank">Vue-demo-CNodeJs</a>
+                            <a id="github" href="https://github.com/Ninthop/vue-demo-CNode/tree/optimization" target="_blank">Vue-demo-CNodeJs</a>
                             <hr>
                             <div>技术栈：</div>
                             <ul>

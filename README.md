@@ -22,11 +22,12 @@
 ```
 ├── src
 │   ├── assets                   // 样式及静态资源
-│   ├── common                   // 公用组件方法
+│   ├── common                   // 动画方法
 │   ├── components
 │   │   ├──Home                  // 主页组件
 │   │   ├──Topic                 // 详情页组件及部分用户页共用组件
 │   │   ├──Header.vue            // 全局首页
+│   ├── lib                      // axios、http封装及公用方法
 │   ├── router                   // 路由
 │   ├── store                    // 状态管理
 │   ├── views
